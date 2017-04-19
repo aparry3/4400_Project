@@ -48,6 +48,11 @@ angular.module('databaseProject')
       angular.copy(data.data, locs);
     });
   }
+  function getWith(cityorstate) {
+    return $http.post('/locations',cityorstate).success(function(data) {
+      angular.copy(data.data, locs);
+    });
+  }
   function add(loc) {
     locs.push(loc);
     l = {
@@ -60,7 +65,8 @@ angular.module('databaseProject')
   }
   return {
     add: add,
-    get: get
+    get: get,
+    getWith:getWith
 
   };
 }])

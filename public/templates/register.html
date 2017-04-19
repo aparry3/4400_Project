@@ -60,7 +60,7 @@
             <label for="city">City</label>
           </td>
           <td>
-            <select ng-disabled="user.type != 'City Official'" class="form-control" name="city" id="city" ng-model="user.city">
+            <select ng-disabled="user.type != 'City Official'" class="form-control" name="city" id="city" ng-model="user.city" ng-change="changeSelected(user)">
               <option ng-repeat="c in cities" value={{c}}>{{c}}</option>
             </select>
           </td>
@@ -70,7 +70,7 @@
             <label for="state">State</label>
           </td>
           <td>
-            <select ng-disabled="user.type != 'City Official'" class="form-control" name="state" id="state" ng-model="user.state">
+            <select ng-disabled="user.type != 'City Official'" class="form-control" name="state" id="state" ng-model="user.state" ng-change="changeSelected(user)">
               <option ng-repeat="s in states" value={{s}}>{{s}}</option>
             </select>
           </td>
@@ -91,6 +91,8 @@
     <div>
       <!-- {{user.type}} -->
       <button id="create" class="btn btn-success" ng-click="addUser(user)">Create</button>
+      <button id="back" class="btn btn-default" ng-click="back()">Back</button>
+
       <!-- <pre>{{users}}</pre> -->
     </div>
   </form>

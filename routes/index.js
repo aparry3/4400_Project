@@ -37,6 +37,14 @@ router.get('/locations', function(req, res, next) {
     res.send(data);
   });
 });
+router.post('/locations', function(req, res, next) {
+  console.log(req.body);
+  conn.query('SELECT * FROM LOCATION WHERE ?',req.body, function (err, data) {
+    if (err) throw err;
+    console.log(data);
+    res.send(data);
+  });
+});
 router.post('/location', function(req, res, next) {
   console.log(req.body);
   console.log(conn.query('INSERT INTO LOCATION SET ?', req.body, function (err, data) {

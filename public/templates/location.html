@@ -2,7 +2,7 @@
   <h2>New POI</h2>
   <form>
     <div>
-      
+
       <table>
         <tr>
           <td>
@@ -18,7 +18,7 @@
 
           </td>
           <td>
-            <select class="form-control" name="city" id="city" ng-model="loc.city">
+            <select class="form-control" name="city" id="city" ng-model="loc.city" ng-change="changeSelected(loc)">
               <option ng-repeat="c in cities" values="{{c}}">{{c}}</option>
             </select>
           </td>
@@ -29,7 +29,7 @@
 
           </td>
           <td>
-            <select class="form-control" name="state" id="state" ng-model="loc.state">
+            <select class="form-control" name="state" id="state" ng-model="loc.state" ng-change="changeSelected(loc)">
               <option ng-repeat="s in states" values="{{s}}">{{s}}</option>
 
             </select>

@@ -26,6 +26,36 @@ function($scope,Users,Locations,$location,CityOfficials) {
     return $scope.username != "" && $scope.password != "" && $scope.confirm != "" &&
       $scope.email != "";
   };
+  $scope.changeSelected = function(user) {
+    var filter = {}
+    if (user.state != null) {
+      filter.State = user.state
+    }
+    if (user.city != null) {
+      filter.City = user.city;
+    }
+    if (filter.City == null || filter.State == null) {
+      Locations.getWith(filter).success(function(data) {
+        var cities = [];
+        var states = [];
+        for (var loc in data) {
+          console.log(loc);
+          cities.push(data[loc].City);
+          states.push(data[loc].State);
+        }
+        if (filter.City != null) {
+          $scope.states = states;
+        }
+        if (filter.State != null) {
+          $scope.cities = cities;
+        }
+      });
+    }
+  }
+  $scope.back = function() {
+    $location.path('login');
+  }
+
   $scope.addUser = function(user) {
     Users.addUser(user);
       console.log("--------------------------------------------------------------")

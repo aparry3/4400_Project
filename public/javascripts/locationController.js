@@ -22,5 +22,31 @@ function($scope,Locations, POIs,$location) {
   $scope.back= function(loc) {
     $location.path('new_data_point');
   }
+  $scope.changeSelected = function(user) {
+    var filter = {}
+    if (user.state != null) {
+      filter.State = user.state
+    }
+    if (user.city != null) {
+      filter.City = user.city;
+    }
+    if (filter.City == null || filter.State == null) {
+      Locations.getWith(filter).success(function(data) {
+        var cities = [];
+        var states = [];
+        for (var loc in data) {
+          console.log(loc);
+          cities.push(data[loc].City);
+          states.push(data[loc].State);
+        }
+        if (filter.City != null) {
+          $scope.states = states;
+        }
+        if (filter.State != null) {
+          $scope.cities = cities;
+        }
+      });
+    }
+  }
 
 }])
