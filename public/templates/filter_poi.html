@@ -1,0 +1,116 @@
+<div>
+  <h2>Filter POI</h2>
+  <!-- <pre>{{filters}}</pre> -->
+  <form>
+    <div>
+      <table>
+        <tr>
+          <td>
+            <label for="name">Name</label>
+          </td>
+          <td>
+            <select class="form-control" name="name" id="name" ng-model="filters.Name">
+              <option value="" disabled selected>Filter by Name</option>
+              <option ng-repeat="p in pois" value="{{p.Name}}">{{ p.Name }}</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="city">City</label>
+          </td>
+          <td>
+            <select class="form-control" name="city" id="city" ng-model="filters.City">
+              <option value="" disabled selected>Filter by City</option>
+
+              <option ng-repeat="c in cities" value="{{c}}">{{ c }}</option>
+
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="state">State</label>
+
+          </td>
+          <td>
+            <select class="form-control" name="state" id="state" ng-model="filters.State">
+              <option value="" disabled selected>Filter by State</option>
+
+              <option ng-repeat="s in states" value="{{s}}">{{ s }}</option>
+
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="state">State</label>
+
+          </td>
+          <td>
+            <input class="form-control" type="text" name="zipcode" id="zipcode" placeholder="Zipcode" ng-model="filters.Zipcode"/>
+
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="flagged">Flagged</label>
+
+          </td>
+          <td>
+            <input class="form-control" type="checkbox" name="flagged" id="flagged" placeholder="Flagged" ng-model="filters.Flagged"/>
+
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="low_date">After</label>
+
+          </td>
+          <td>
+            <input class="form-control" type="date" name="low_date" id="low_date"
+              ng-model="filters.LowDate"/>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="high_date">Before</label>
+
+          </td>
+          <td>
+            <input class="form-control" type="date" name="high_date" id="high_date"
+              ng-model="filters.HighDate"/>
+          </td>
+        </tr>
+
+    </table>
+    </div>
+
+    <div>
+
+      <button id="create" class="btn btn-success" ng-click="apply(filters)">Apply Filter</button>
+      <button id="create" class="btn btn-default" ng-click="reset()">Reset Filter</button>
+      <button id="create" class="btn btn-default" ng-click="back()">Back</button>
+
+
+      <!-- <pre>{{users}}</pre> -->
+    </div>
+  </form>
+  <table class="table-striped">
+    <tr>
+      <th>Name</th>
+      <th>City</th>
+      <th>State</th>
+      <th>Zipcode</th>
+      <th>Flagged?</th>
+      <th>Date Flagged</th>
+    </tr>
+    <tr ng-repeat="p in pois" ng-click="openPoint(p)">
+      <td>{{p.Name}}</td>
+      <td>{{p.City}}</td>
+      <td>{{p.State}}</td>
+      <td>{{p.Zipcode}}</td>
+      <td>{{p.Dlagged}}</td>
+      <td>{{p.Date_Time_Flagged}}</td>
+    </tr>
+  </table>

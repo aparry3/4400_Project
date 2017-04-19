@@ -1,0 +1,62 @@
+<div>
+  <h2>New POI</h2>
+  <form>
+    <div>
+      
+      <table>
+        <tr>
+          <td>
+            <label for="name">Location Name</label>
+          </td>
+          <td>
+            <input class="form-control" type="text" name="name" id="name" placeholder="Name" ng-model="loc.name"/>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="city">City</label>
+
+          </td>
+          <td>
+            <select class="form-control" name="city" id="city" ng-model="loc.city">
+              <option ng-repeat="c in cities" values="{{c}}">{{c}}</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="state">State</label>
+
+          </td>
+          <td>
+            <select class="form-control" name="state" id="state" ng-model="loc.state">
+              <option ng-repeat="s in states" values="{{s}}">{{s}}</option>
+
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="zipcode">Zipcode</label>
+
+          </td>
+          <td>
+            <input class="form-control" type="text" name="zipcode" id="zipcode" placeholder="Zipcode" ng-model="loc.zipcode"/>
+
+          </td>
+        </tr>
+      </table>
+
+
+
+    </div>
+
+    <div>
+
+      <button id="back" class="btn btn-default" ng-click="back()">Back</button>
+      <button id="submit" class="btn btn-success" class="submit" ng-click="addLocation(loc)">Submit</button>
+
+
+    </div>
+  </form>
+</div>

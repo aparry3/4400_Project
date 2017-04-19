@@ -1,0 +1,110 @@
+<div>
+  <h2>Filter Data Points for {{filters.POI}}</h2>
+  <form>
+    <div>
+      <table>
+        <tr>
+          <td>
+            <label for="type">Date Type</label>
+          </td>
+          <td>
+            <select class="form-control" name="type" id="type" ng-model="filters.DataType">
+              <option ng-repeat="t in types" value="{{t.Name}}">{{ t.Name }}</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="valuelow">Value Above</label>
+          </td>
+          <td>
+            <input class="form-control" type="text" name="value_low" id="value_low" ng-model="filters.valueLow"/>
+
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="valuehigh">Value Less Than</label>
+          </td>
+          <td>
+            <input class="form-control" type="text" name="value_high" id="value_high" ng-model="filters.valueHigh"/>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="low_date">After</label>
+          </td>
+          <td>
+            <input class="form-control" type="date" name="low_date" id="low_date"
+              ng-model="filters.lowDate"/>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="high_date">Before</label>
+          </td>
+          <td>
+            <input class="form-control" type="date" name="high_date" id="high_date"
+              ng-model="filters.highDate"/>
+          </td>
+        </tr>
+      </table>
+
+    </div>
+
+    <div>
+
+      <button id="create" class="btn btn-success" ng-click="apply(filters)">Apply Filter</button>
+      <button id="create" class="btn btn-default" ng-click="reset()">Reset Filter</button>
+
+    </div>
+  </form>
+  <table>
+    <tr>
+      <th>
+        Data Type
+      </th>
+      <th>
+        Value
+      </th>
+      <th>
+        Date and Time
+      </th>
+    </tr>
+    <tr ng-repeat="p in filteredPoints" >
+      <td>
+        {{p.DataType}}
+      </td>
+      <td>
+        {{p.Value}}
+      </td>
+      <td>
+        {{p.Date_Time}}
+      </td>
+    </tr>
+  </table>
+  <!-- <ul>
+    <li ng-repeat="p in filteredPoints" ng-click="select(p)">
+      <div>
+        <div>
+          {{p.type}}
+        </div>
+        <div>
+          {{p.value}}
+
+        </div>
+        <div>
+          {{p.datetime}}
+
+        </div>
+
+      </div>
+    </li>
+  </ul> -->
+  <div>
+
+    <button id="create" class="btn btn-danger" ng-click="flag()">Flag</button>
+    <button id="create" class="btn btn-default" ng-click="back()">Back</button>
+
+  </div>
+</div>

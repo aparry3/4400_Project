@@ -1,0 +1,67 @@
+<form>
+  <div>
+    <table>
+      <tr>
+        <td>
+          <label for="name">POI Location</label>
+        </td>
+        <td>
+          <div class="input-group">
+            <select class="form-control" name="name" id="name" ng-model="dp.name">
+              <option ng-repeat="name in poiNames" value="{{name.Name}}">{{name.Name}}</option>
+            </select>
+            <span class="input-group-btn">
+              <button class="btn btn-secondary" type="button" ng-click="newLocation()">Add</button>
+            </span>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label for="date">Date</label>
+        </td>
+        <td>
+          <input type="date" class="form-control" name="date" id="date" placeholder="Date" ng-model="dp.date"/>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label for="time">Time</label>
+        </td>
+        <td>
+          <input type="time" class="form-control" name="time" id="time" placeholder="Time" ng-model="dp.time"/>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label for="type">Measure Type</label>
+        </td>
+        <td>
+          <select name="type" class="form-control" id="type" ng-model="dp.type">
+            <option ng-repeat="t in datatypes" value="{{t}}">{{t}}</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label for="value">Value</label>
+        </td>
+        <td>
+          <input type="text" class="form-control" name="value" id="value" placeholder="Value" ng-model="dp.value"/>
+        </td>
+      </tr>
+    </table>
+
+
+
+
+  </div>
+
+  <div>
+
+    <button class="btn btn-default" id="back" ng-click="logout()">Logout</button>
+    <button id="submit" class="btn btn-success" ng-click="addDataPoint(dp)">Submit</button>
+
+
+  </div>
+</form>

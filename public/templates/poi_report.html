@@ -1,0 +1,42 @@
+  <div>
+    <table class="table-striped">
+      <tr>
+        <th>POI Location</th><th>City</th><th>State</th><th>Mold Min</th><th>Mold Avg</th><th>Mold Max</th>
+          <th>AQ Min</th><th>AQ Avg</th><th>AQ Max</th><th>Number of DP</th><th>Flagged</th>
+      </tr>
+      <tr ng-repeat="p in pois">
+        <td>
+          {{p.name}}
+        </td>
+        <td>
+          {{p.city}}
+        </td>
+        <td>
+          {{p.state}}
+        </td>
+        <td>
+          {{p.moldMin}}
+        </td>
+        <td>
+          {{p.moldMax}}
+        </td>
+        <td>
+          {{p.AQMin}}
+        </td>
+        <td>
+          {{p.AQAvg}}
+        </td>
+        <td>
+          {{p.AQMax}}
+        </td>
+        <td>
+          {{p.numPoints}}
+        </td>
+        <td>
+          {{p.flagged}}
+        </td>
+      </tr>
+
+    </table>
+  </div>
+  <button class="btn btn-default" ng-click="back()">Back</button>

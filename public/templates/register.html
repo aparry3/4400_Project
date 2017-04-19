@@ -1,0 +1,97 @@
+
+<di>
+  <h2>Register</h2>
+  <form>
+      <div>
+      <table>
+        <tr>
+          <td>
+            <label for="username">Username</label>
+          </td>
+          <td>
+            <input type="text" name="username" class="form-control" id="username" placeholder="Username" ng-model="user.username"/>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="email">Email</label>
+          </td>
+          <td>
+            <input type="email" name="email" class="form-control" id="email" placeholder="Email" ng-model="user.email"/>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="password">Password</label>
+          </td>
+          <td>
+            <input type="password" name="password" class="form-control" id="password" placeholder="Password" ng-model="user.password"/>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="confirm_password">Confirm Password</label>
+          </td>
+          <td>
+            <input type="password" class="form-control" name="confirm_password" id="confirm_password"
+              placeholder="Confirm Password" ng-model="user.confirm"/>
+
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="type">Select User Type</label>
+          </td>
+          <td>
+            <select class="form-control" name="type" id="type" ng-model="user.type">
+              <option ng-repeat="t in types" value="{{t}}">{{ t }}</option>
+            </select>
+          </td>
+        </tr>
+      <!-- <h1>{{username}}</h1> -->
+      <!-- <h1>{{email}}</h1> -->
+      <!-- <h1>{{password}}</h1> -->
+    </table>
+    </div>
+    <div >
+      <table>
+        <tr>
+          <td>
+            <label for="city">City</label>
+          </td>
+          <td>
+            <select ng-disabled="user.type != 'City Official'" class="form-control" name="city" id="city" ng-model="user.city">
+              <option ng-repeat="c in cities" value={{c}}>{{c}}</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="state">State</label>
+          </td>
+          <td>
+            <select ng-disabled="user.type != 'City Official'" class="form-control" name="state" id="state" ng-model="user.state">
+              <option ng-repeat="s in states" value={{s}}>{{s}}</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="title">Title</label>
+          </td>
+          <td>
+            <input ng-disabled="user.type != 'City Official'" type="text" class="form-control" name="title" id="title" placeholder="Title" ng-model="user.title"/>
+          </td>
+        </tr>
+      </table>
+
+
+
+    </div>
+    <div>
+      <!-- {{user.type}} -->
+      <button id="create" class="btn btn-success" ng-click="addUser(user)">Create</button>
+      <!-- <pre>{{users}}</pre> -->
+    </div>
+  </form>
+</div>

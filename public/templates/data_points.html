@@ -1,0 +1,31 @@
+
+    <form>
+      <div>
+        <table class="table-striped">
+          <tr>
+            <th>Select</th><th>POI</th><th>DataType</th><th>Value</th><th>Date</th><th>Time</th><th>Flagged</th>
+          </tr>
+          <tr ng-repeat="dp in datapoints">
+              <td><input type="checkbox" name="select" ng-model="checkedPoints[dp.name+'_'+dp.datime]"/></td>
+              <td>{{dp.name}}</td>
+              <td>{{dp.type}}</td>
+              <td>{{dp.value}}</td>
+              <td>{{dp.date}}</td>
+              <td>{{dp.time}}</td>
+              <td>{{dp.flagged}}</td>
+          </tr>
+        </table>
+        <pre>{{checkedPoints}}</pre>
+
+      </div>
+
+      <div>
+
+        <button class="btn btn-default" id="back" ng-click="back()">Back</button>
+        <button class="btn btn-danger" id="reject" class="submit" ng-click="reject()">Reject</button>
+        <button class="btn btn-success" id="accept" class="submit" ng-click="accept()">Accept</button>
+
+
+
+      </div>
+    </form>

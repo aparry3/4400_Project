@@ -1,0 +1,30 @@
+<div class="content">
+  <h2>Login</h2>
+  <div class="alert alert-danger" ng-if="loginFailed" role="alert"><h3>Login Failed:</h3><span>Enter valid username and password</span></div>
+
+  <div>
+    <form>
+      <table>
+        <tr>
+          <td>
+            <label for="username">Username</label>
+          </td>
+          <td>
+            <input name="username" ng-model="cred.username" placeholder="Username" class="form-control" type="text"/>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="Password">Password</label>
+          </td>
+          <td>
+            <input name="password" ng-model="cred.password" placeholder="Password" class="form-control" type="password"/>
+          </td>
+        </tr>
+      </table>
+
+      <button ng-disabled="!formComplete(cred)" ng-click="login(cred)" class="btn btn-success">Login</button>
+      <button ng-click="register()" class="btn btn-default">Register</button>
+    </form>
+  </div>
+</div>

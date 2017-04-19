@@ -1,0 +1,70 @@
+
+<div>
+  <table class="table-striped">
+    <tr>
+      <th>Select<th>Username</th><th>City</th><th>State</th><th>Title</th>
+    </tr>
+    <tr ng-repeat="co in cityofficials">
+        <td><input type="checkbox" name="select" ng-model="checkedNames[co.name]"/></td>
+        <td>{{co.name}}</td>
+        <td>{{co.city}}</td>
+        <td>{{co.state}}</td>
+        <td>{{co.title}}</td>
+    </tr>
+  </table>
+  <pre>{{checkedNames}}</pre>
+
+</div>
+
+<div>
+
+  <button class="btn btn-default" id="back" ng-click="back()">Back</button>
+  <button class="btn btn-danger" id="reject" class="submit" ng-click="reject()">Reject</button>
+  <button class="btn btn-success" id="accept" class="submit" ng-click="accept()">Accept</button>
+
+
+
+</div>
+
+<!-- <form>
+  <div>
+    <ul>
+      <li ng-repeat="co in cityofficials">
+        <div>
+          <div>
+            <input type="checkbox" name="select" />
+          </div>
+          <div>
+            {{co.name}}
+          </div>
+          <div>
+            {{co.email}}
+
+          </div>
+          <div>
+            {{co.city}}
+
+          </div>
+          <div>
+            {{co.state}}
+
+          </div>
+          <div>
+            {{co.title}}
+          </div>
+        </div>
+      </li>
+    </ul>
+
+  </div>
+
+  <div>
+
+    <button id="back" >Back</button>
+    <button id="reject" class="submit">Reject</button>
+    <button id="accept" class="submit">Accept</button>
+
+
+
+  </div>
+</form> -->
