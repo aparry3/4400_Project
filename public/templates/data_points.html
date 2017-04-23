@@ -3,9 +3,9 @@
       <div>
         <table class="table-striped">
           <tr>
-            <th>Select</th><th>POI</th><th>DataType</th><th>Value</th><th>Date</th><th>Time</th><th>Flagged</th>
+            <th>Select</th><th ng-click="sortBy('name')">POI</th><th ng-click="sortBy('type')">DataType</th><th ng-click="sortBy('value')">Value</th><th ng-click="sortBy('date')">Date</th><th>Time</th><th>Flagged</th>
           </tr>
-          <tr ng-repeat="dp in datapoints">
+          <tr ng-repeat="dp in datapoints | orderBy:propertyName:reverse">
               <td><input type="checkbox" name="select" ng-model="checkedPoints[dp.name+'_'+dp.datime]"/></td>
               <td>{{dp.name}}</td>
               <td>{{dp.type}}</td>

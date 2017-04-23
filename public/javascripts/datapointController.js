@@ -3,6 +3,8 @@ angular.module('databaseProject').controller('DPCtrl',
 function($scope,Locations,DataPoints,$location) {
   $scope.datapoints = []
   $scope.checkedPoints = {};
+  $scope.reversed = true;
+  $scope.propertyName = 'name';
   DataPoints.getPending().success(function(res) {
     console.log(res);
     $scope.datapoints = [];
@@ -21,6 +23,11 @@ function($scope,Locations,DataPoints,$location) {
 
 
     }
+    $scope.sortBy = function(propertyName) {
+      $scope.reverse = (propertyName !== null && $scope.propertyName === propertyName)
+          ? !$scope.reverse : false;
+      $scope.propertyName = propertyName;
+    };
     $scope.accept = function() {
       for (name in $scope.checkedPoints) {
         if ($scope.checkedPoints[name] == true) {
