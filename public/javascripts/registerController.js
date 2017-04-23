@@ -9,6 +9,7 @@ function($scope,Users,Locations,$location,CityOfficials) {
   $scope.cities = [];
   $scope.states = [];
   $scope.locations = [];
+  $scope.error = false;
 
   var locations = Locations.get().success(function(res) {
     console.log(res);
@@ -61,8 +62,18 @@ function($scope,Users,Locations,$location,CityOfficials) {
   }
 
   $scope.addUser = function(user) {
-    Users.addUser(user);
-      console.log("--------------------------------------------------------------")
+    Users.addUser(user).then(function(data) {
+      console.log(data);
+      $scope.error = false;
+      if (user.type != 'City Official') {
+        console.log('login');
+        $location.path('login');
+
+      }
+
+    },function(err) {
+      $scope.error = true;
+    });
     if (user.type == 'City Official') {
         co = {
           'Username': user.username,
@@ -71,18 +82,18 @@ function($scope,Users,Locations,$location,CityOfficials) {
           'State': user.state,
           'Pending': 1
         };
-        CityOfficials.add(co).success(function(data) {
+        CityOfficials.add(co).then(function(data) {
           console.log(data);
-        }).error(function(err) {
-          console.log("some error");
+          $location.path('login');
+
+        }, function(err) {
+          $scope.error = true;
         });
       }
 
 
 
 
-
-    $location.path('login');
   }
 
 }])

@@ -2,6 +2,7 @@ angular.module('databaseProject').controller('NewDPCtrl', ['$scope','DataPoints'
  function($scope,DataPoints,Datatypes,POIs,$location) {
   $scope.datatypes = [];
   $scope.poiNames = [];
+  $scope.error = false;
   POIs.getNames().success(function(res) {
     $scope.poiNames = res;
   })
@@ -25,7 +26,14 @@ angular.module('databaseProject').controller('NewDPCtrl', ['$scope','DataPoints'
   //   });
   // });
   $scope.addDataPoint = function(dataPoint) {
-    DataPoints.add(dataPoint);
+    DataPoints.add(dataPoint).then(function(data) {
+      console.log(data);
+      $scope.error = false;
+
+    },function(err) {
+      console.log('error')
+      $scope.error = true;
+    });
     $scope.dp = {};
 
   }

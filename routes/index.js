@@ -26,6 +26,8 @@ router.post('/user', function(req, res, next) {
   console.log(req.body);
   console.log(conn.query('INSERT INTO USER SET ?', req.body, function (err, data) {
     if (err) return res.status(400).send();
+    res.send(data);
+
 
   }));
 });
@@ -49,6 +51,7 @@ router.post('/location', function(req, res, next) {
   console.log(req.body);
   console.log(conn.query('INSERT INTO LOCATION SET ?', req.body, function (err, data) {
     if (err) return res.status(400).send();
+    res.send(data);
 
   }));
 });
@@ -72,6 +75,7 @@ router.post('/data_points', function(req, res, next) {
   console.log(req.body);
   console.log(conn.query('INSERT INTO DATAPOINT SET ?', req.body, function (err, data) {
     if (err) return res.status(400).send();
+    res.send(data);
 
   }));
 });
@@ -176,6 +180,7 @@ router.post('/poi', function(req, res, next) {
   console.log(req.body);
   console.log(conn.query('INSERT INTO POI SET ?', req.body, function (err, data) {
     if (err) return res.status(400).send();
+    res.send(data);
 
   }));
 });

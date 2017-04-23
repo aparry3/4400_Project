@@ -17,6 +17,7 @@ angular.module('databaseProject')
     })
   }
   function addUser(user) {
+    var def = $q.defer();
     users.push(user);
     us = {
       'Username': user.username,
@@ -26,8 +27,13 @@ angular.module('databaseProject')
     }
     $http.post('/user',us).success(function(data) {
        user = data;
-       return user;
+       console.log(data);
+       def.resolve(data);
+    }).error(function(data) {
+      console.log("error");
+      def.reject(data);
     });
+    return def.promise;
 
 
 
@@ -41,7 +47,7 @@ angular.module('databaseProject')
 
   };
 }])
-.service('Locations', ['$http', function($http) {
+.service('Locations', ['$http','$q', function($http,$q) {
   locs = [];
   function get() {
     return $http.get('/locations').success(function(data) {
@@ -54,14 +60,29 @@ angular.module('databaseProject')
     });
   }
   function add(loc) {
+    var def = $q.defer();
     locs.push(loc);
-    l = {
-      'City':loc.city,
-      'State':loc.state,
+    try {
+      l = {
+        'City':loc.city,
+        'State':loc.state,
+      }
+    } catch (err) {
+      console.log(err);
+      def.reject("invalid data");
+      return def.promise;
     }
+
+
     return $http.post('/location',l).success(function(res) {
       console.log(res);
+      def.resolve(res);
+
+    }).error(function(err) {
+      console.log(err);
+      def.reject(err);
     });
+    return def.promise;
   }
   return {
     add: add,
@@ -108,7 +129,7 @@ angular.module('databaseProject')
 
   };
 }])
-.service('DataPoints', ['$http', function($http) {
+.service('DataPoints', ['$http','$q', function($http,$q) {
   function get() {
     return $http.get('/data_points').success(function(data) {
       angular.copy(data.data, locs);
@@ -125,8 +146,18 @@ angular.module('databaseProject')
     });
   }
   function add(dp) {
-    var date = new Date(dp.date).toISOString().slice(0,10);
-    var time = new Date(dp.time).toISOString().slice(11,19);
+    var def = $q.defer();
+    try{
+      var date = new Date(dp.date).toISOString().slice(0,10);
+      var time = new Date(dp.time).toISOString().slice(11,19);
+    } catch (err) {
+      def.reject("invalid data");
+      return def.promise;
+    }
+      //
+      // def.reject("invalid entries");
+      // return def.promise;
+
     console.log(date);
     console.log(time);
 
@@ -137,7 +168,13 @@ angular.module('databaseProject')
       'DataType': dp.type,
       'POI': dp.name,
     }
-    return $http.post('/data_points',dp);
+    $http.post('/data_points',dp).success(function(data) {
+      def.resolve(data);
+    }).error(function(err) {
+      console.log("error")
+      def.reject(err);
+    });
+    return def.promise;
   }
   function accept(poi,datetime) {
     return $http.put('/data_points/'+poi+'/'+datetime.slice(0,10)+'/'+datetime.slice(11,19)+'/1');
@@ -155,7 +192,7 @@ angular.module('databaseProject')
 
   };
 }])
-.service('POIs', ['$http', function($http) {
+.service('POIs', ['$http','$q', function($http, $q) {
   var locs = [];
   var all_info = [];
 
@@ -183,18 +220,31 @@ angular.module('databaseProject')
     });
   }
   function add(loc) {
+    var def = $q.defer();
     locs.push(loc);
-    l = {
-      'City':loc.city,
-      'State':loc.state,
-      'Date_Time_Flagged': new Date().toISOString().slice(0, 19).replace('T', ' '),
-      'Flagged': 0,
-      'Name':loc.name,
-      'Zipcode':loc.zipcode
+    try {
+      l = {
+        'City':loc.city,
+        'State':loc.state,
+        'Date_Time_Flagged': new Date().toISOString().slice(0, 19).replace('T', ' '),
+        'Flagged': 0,
+        'Name':loc.name,
+        'Zipcode':loc.zipcode
+      }
+    } catch (err) {
+      def.reject(err);
+      return def.promise;
     }
+
     return $http.post('/poi',l).success(function(res) {
       console.log(res);
+      def.resolve(res);
+
+    }).error(function(err) {
+      def.reject(err);
+
     });
+    return def.promise;
   }
   return {
     add: add,

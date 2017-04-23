@@ -17,8 +17,16 @@ function($scope,Locations, POIs,$location) {
     }
   });
   $scope.addLocation= function(loc) {
-    POIs.add(loc);
-    $location.path('new_data_point');
+    POIs.add(loc).then(function(data) {
+      console.log(data);
+      $scope.error = false;
+      $location.path('new_data_point');
+
+    }, function(data) {
+      console.log(data);
+      $scope.error = true;
+
+    });
 
   }
   $scope.back= function(loc) {
