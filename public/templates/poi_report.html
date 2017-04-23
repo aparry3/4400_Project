@@ -1,39 +1,43 @@
   <div>
     <table class="table-striped">
       <tr>
-        <th>POI Location</th><th>City</th><th>State</th><th>Mold Min</th><th>Mold Avg</th><th>Mold Max</th>
-          <th>AQ Min</th><th>AQ Avg</th><th>AQ Max</th><th>Number of DP</th><th>Flagged</th>
+        <th ng-click="sortBy('Name')">POI Location</th><th>City</th><th>State</th><th ng-click="sortBy('MinMold')">Mold Min</th><thng-click="sortBy('AvgMold')">Mold Avg</th>
+        <th ng-click="sortBy('MaxMold')">Mold Max</th>
+          <th ng-click="sortBy('MinAir')">AQ Min</th><th ng-click="sortBy('AvgAir')">AQ Avg</th><th ng-click="sortBy('MaxAir')">AQ Max</th><th>Number of DP</th><th>Flagged</th>
       </tr>
-      <tr ng-repeat="p in pois">
+      <tr ng-repeat="p in pois | orderBy:propertyName:reverse">
         <td>
-          {{p.name}}
+          {{p.Name}}
         </td>
         <td>
-          {{p.city}}
+          {{p.City}}
         </td>
         <td>
-          {{p.state}}
+          {{p.State}}
         </td>
         <td>
-          {{p.moldMin}}
+          {{p.MinMold}}
         </td>
         <td>
-          {{p.moldMax}}
+          {{p.AvgMold}}
         </td>
         <td>
-          {{p.AQMin}}
+          {{p.MaxMold}}
         </td>
         <td>
-          {{p.AQAvg}}
+          {{p.MinAir}}
         </td>
         <td>
-          {{p.AQMax}}
+          {{p.AvgAir}}
         </td>
         <td>
-          {{p.numPoints}}
+          {{p.MaxAir}}
         </td>
         <td>
-          {{p.flagged}}
+          {{p.CountMold + p.CountAir}}
+        </td>
+        <td>
+          {{p.Flagged}}
         </td>
       </tr>
 

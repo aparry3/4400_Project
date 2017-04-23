@@ -1,5 +1,5 @@
 angular.module('databaseProject')
-.service('Users', ['$http', function($http) {
+.service('Users', ['$http','$q', function($http,$q) {
   users = [];
   user = {};
   function getUsers() {
@@ -24,7 +24,7 @@ angular.module('databaseProject')
       'Email': user.email,
       'Usertype': user.type
     }
-    return $http.post('/user',us).success(function(data) {
+    $http.post('/user',us).success(function(data) {
        user = data;
        return user;
     });
@@ -77,6 +77,11 @@ angular.module('databaseProject')
       angular.copy(data.data, locs);
     });
   }
+  function getUser(user) {
+    return $http.get('/city_officials/'+user.Username).success(function(data) {
+      angular.copy(data.data, locs);
+    });
+  }
   function add(co) {
     return $http.post('/city_officials',co).success(function(data) {
       return data;
@@ -88,14 +93,15 @@ angular.module('databaseProject')
     });
   }
   function accept(username) {
-    return $http.put('/city_officials/'+username);
+    return $http.put('/city_officials/'+username+'/'+1);
   }
   function reject(username) {
-    return $http.delete('/city_officials/'+username);
+    return $http.put('/city_officials/'+username+'/'+0);
   }
   return {
     add: add,
     get: get,
+    getUser: getUser,
     accept:accept,
     reject,reject,
     getPending, getPending
@@ -123,24 +129,21 @@ angular.module('databaseProject')
     var time = new Date(dp.time).toISOString().slice(11,19);
     console.log(date);
     console.log(time);
-    console.log(date + " " + time);
 
     dp = {
-      'Date_Time': date + " " + time,
       'DpDate': date,
       'DpTime': time,
       'Value': dp.value,
-      'Pending': 1,
       'DataType': dp.type,
-      'POI': dp.name
+      'POI': dp.name,
     }
     return $http.post('/data_points',dp);
   }
   function accept(poi,datetime) {
-    return $http.put('/data_points/'+poi+'/'+datetime.slice(0,19).replace('T',' '));
+    return $http.put('/data_points/'+poi+'/'+datetime.slice(0,10)+'/'+datetime.slice(11,19)+'/1');
   }
   function reject(poi,datetime) {
-    return $http.delete('/data_points/'+poi+'/'+datetime.slice(0,19).replace('T',' '));
+    return $http.put('/data_points/'+poi+'/'+datetime.slice(0,10)+'/'+datetime.slice(11,19)+'/0');
   }
   return {
     add: add,
@@ -153,7 +156,9 @@ angular.module('databaseProject')
   };
 }])
 .service('POIs', ['$http', function($http) {
-  locs = [];
+  var locs = [];
+  var all_info = [];
+
   function get() {
     return $http.get('/pois').success(function(data) {
       angular.copy(data.data, locs);
@@ -173,8 +178,8 @@ angular.module('databaseProject')
   }
 
   function getAllInfo() {
-    return $http.get('/all_poi_info').success(function(data) {
-
+    return $http.get('/poi_all_info').success(function(data) {
+      angular.copy(data.data, all_info)
     });
   }
   function add(loc) {

@@ -8,8 +8,11 @@ function($scope,Users,Locations,$location,CityOfficials) {
   $scope.type;
   $scope.cities = [];
   $scope.states = [];
+  $scope.locations = [];
+
   var locations = Locations.get().success(function(res) {
     console.log(res);
+    $scope.locations = res;
     for (var loc in res) {
       console.log(loc);
       $scope.cities.push(res[loc].City);
@@ -22,9 +25,9 @@ function($scope,Users,Locations,$location,CityOfficials) {
   Users.getUsers().success(function(res) {
     $scope.users = res;
   });
-  $scope.formComplete = function() {
-    return $scope.username != "" && $scope.password != "" && $scope.confirm != "" &&
-      $scope.email != "";
+  $scope.formComplete = function(user) {
+    return user.username != "" && $scope.password != "" && $scope.confirm != "" &&
+      $scope.email != "" ;
   };
   $scope.changeSelected = function(user) {
     var filter = {}
@@ -38,11 +41,12 @@ function($scope,Users,Locations,$location,CityOfficials) {
       Locations.getWith(filter).success(function(data) {
         var cities = [];
         var states = [];
-        for (var loc in data) {
-          console.log(loc);
-          cities.push(data[loc].City);
-          states.push(data[loc].State);
-        }
+        $scope.locations = data;
+        // for (var loc in data) {
+        //   console.log(loc);
+        //   cities.push(data[loc].City);
+        //   states.push(data[loc].State);
+        // }
         if (filter.City != null) {
           $scope.states = states;
         }
@@ -69,6 +73,8 @@ function($scope,Users,Locations,$location,CityOfficials) {
         };
         CityOfficials.add(co).success(function(data) {
           console.log(data);
+        }).error(function(err) {
+          console.log("some error");
         });
       }
 

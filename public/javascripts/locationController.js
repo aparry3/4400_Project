@@ -4,10 +4,12 @@ function($scope,Locations, POIs,$location) {
   $scope.city = "";
   $scope.state = "";
   $scope.zip = "";
+  $scope.locs = [];
   $scope.cities = [];
   $scope.states = [];
   var locations = Locations.get().success(function(res) {
     console.log(res);
+    $scope.locs = res;
     for (var loc in res) {
       console.log(loc);
       $scope.cities.push(res[loc].City);
@@ -34,6 +36,7 @@ function($scope,Locations, POIs,$location) {
       Locations.getWith(filter).success(function(data) {
         var cities = [];
         var states = [];
+        $scope.locs = data;
         for (var loc in data) {
           console.log(loc);
           cities.push(data[loc].City);

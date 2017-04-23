@@ -23,7 +23,7 @@
             <select class="form-control" name="city" id="city" ng-model="filters.City">
               <option value="" disabled selected>Filter by City</option>
 
-              <option ng-repeat="c in cities" value="{{c}}">{{ c }}</option>
+              <option ng-repeat="c in locs" value="{{c.City}}">{{ c.City }}</option>
 
             </select>
           </td>
@@ -37,7 +37,7 @@
             <select class="form-control" name="state" id="state" ng-model="filters.State">
               <option value="" disabled selected>Filter by State</option>
 
-              <option ng-repeat="s in states" value="{{s}}">{{ s }}</option>
+              <option ng-repeat="s in locs" value="{{s.State}}">{{ s.State }}</option>
 
             </select>
           </td>

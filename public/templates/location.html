@@ -19,7 +19,7 @@
           </td>
           <td>
             <select class="form-control" name="city" id="city" ng-model="loc.city" ng-change="changeSelected(loc)">
-              <option ng-repeat="c in cities" values="{{c}}">{{c}}</option>
+              <option ng-repeat="c in locs" values="{{c.City}}">{{c.City}}</option>
             </select>
           </td>
         </tr>
@@ -30,7 +30,7 @@
           </td>
           <td>
             <select class="form-control" name="state" id="state" ng-model="loc.state" ng-change="changeSelected(loc)">
-              <option ng-repeat="s in states" values="{{s}}">{{s}}</option>
+              <option ng-repeat="s in locs" values="{{s.State}}">{{s.State}}</option>
 
             </select>
           </td>

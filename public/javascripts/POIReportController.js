@@ -1,9 +1,19 @@
-angular.module('databaseProject').controller('POIReportCtrl', ['$scope','DataPoints','Datatypes','POIs','$location',
- function($scope,DataPoints,Datatypes,POIs,$location) {
+angular.module('databaseProject').controller('POIReportCtrl', ['$scope','DataPoints','Datatypes','POIs','$location','orderByFilter',
+ function($scope,DataPoints,Datatypes,POIs,$location,orderByFilter) {
   $scope.datatypes = [];
   $scope.pois = [];
+  var pois = [];
+  $scope.reverse = true;
+  $scope.propertyName = 'Name';
+  $scope.sortBy = function(propertyName) {
+    $scope.reverse = (propertyName !== null && $scope.propertyName === propertyName)
+        ? !$scope.reverse : false;
+    $scope.propertyName = propertyName;
+  };
   POIs.getAllInfo().success(function(res) {
+    console.log(res);
     $scope.pois = res;
+
   })
   Datatypes.get().success(function(res) {
 

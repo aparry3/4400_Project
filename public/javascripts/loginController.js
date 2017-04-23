@@ -1,4 +1,4 @@
-angular.module('databaseProject').controller('LoginCtrl', ['$scope','$location','Users', function($scope,$location,Users) {
+angular.module('databaseProject').controller('LoginCtrl', ['$scope','$location','Users','CityOfficials', function($scope,$location,Users, CityOfficials) {
   $scope.username;
   $scope.password;
   $scope.loginFailed = false;
@@ -23,8 +23,17 @@ angular.module('databaseProject').controller('LoginCtrl', ['$scope','$location',
 
           $location.path('admin');
         } else if (this.user[0].Usertype == 'City Official') {
-          console.log("city official");
-          $location.path('cityofficial');
+          var co = {};
+          CityOfficials.getUser(this.user[0]).success(function(data) {
+            if (data[0].Pending == 0) {
+              $scope.loginFailed = true;
+            } else {
+              console.log("city official");
+              $location.path('cityofficial');
+            }
+          });
+
+
 
         } else if (this.user[0].Usertype == 'City Scientist') {
           console.log("city scientist");

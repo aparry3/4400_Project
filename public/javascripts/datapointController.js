@@ -5,6 +5,8 @@ function($scope,Locations,DataPoints,$location) {
   $scope.checkedPoints = {};
   DataPoints.getPending().success(function(res) {
     console.log(res);
+    $scope.datapoints = [];
+
     for (var i in res) {
       obj = {
         name: res[i].POI,
@@ -12,7 +14,7 @@ function($scope,Locations,DataPoints,$location) {
         value: res[i].Value,
         date: res[i].DpDate,
         time: res[i].DpTime,
-        datime: res[i].DpDate.slice(0,10)+" "+res[i].DpTime
+        datime: res[i].DpDate.slice(0,10) + " " + res[i].DpTime
       }
       console.log(obj.datime);
       $scope.datapoints.push(obj);
@@ -28,7 +30,26 @@ function($scope,Locations,DataPoints,$location) {
 
         //accept WHERE .name = name
       }
-    }
+      DataPoints.getPending().success(function(res) {
+        console.log(res);
+        $scope.datapoints = [];
+
+        for (var i in res) {
+          obj = {
+            name: res[i].POI,
+            type: res[i].DataType,
+            value: res[i].Value,
+            date: res[i].DpDate,
+            time: res[i].DpTime,
+            datime: res[i].DpDate.slice(0,10) + " " + res[i].DpTime
+          }
+          $scope.datapoints.push(obj);
+
+
+        }
+    });
+    $scope.checkedPoints = {};
+  }
     $scope.reject = function() {
       for (name in $scope.checkedPoints) {
         if ($scope.checkedPoints[name] == true) {
@@ -37,6 +58,27 @@ function($scope,Locations,DataPoints,$location) {
         }
         //reject WHERE .name = name
       }
+      DataPoints.getPending().success(function(res) {
+        console.log(res);
+        $scope.datapoints = [];
+
+        for (var i in res) {
+          obj = {
+            name: res[i].POI,
+            type: res[i].DataType,
+            value: res[i].Value,
+            date: res[i].DpDate,
+            time: res[i].DpTime,
+            datime: res[i].DpDate.slice(0,10) + " " + res[i].DpTime
+
+          }
+          console.log(obj.datime);
+          $scope.datapoints.push(obj);
+
+
+        }
+      });
+      $scope.checkedPoints = {};
     }
     $scope.back = function() {
       $location.path('admin');

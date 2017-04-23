@@ -26,6 +26,24 @@ function($scope,Locations,CityOfficials,$location) {
       }
       //accept WHERE .name = name
     }
+    $scope.cityofficials = [];
+
+    CityOfficials.getPending().success(function(res) {
+      console.log(res);
+      for (var i in res) {
+        obj = {
+          name: res[i].Username,
+          email: res[i].Email,
+          city: res[i].City,
+          state: res[i].State,
+          title: res[i].Title
+        }
+        $scope.cityofficials.push(obj);
+      }
+
+
+      });
+    $scope.checkedNames = {};
   }
   $scope.reject = function() {
     for (name in $scope.checkedNames) {
@@ -34,6 +52,22 @@ function($scope,Locations,CityOfficials,$location) {
       }
       //reject WHERE .name = name
     }
+    $scope.cityofficials = [];
+    CityOfficials.getPending().success(function(res) {
+      console.log(res);
+      for (var i in res) {
+        obj = {
+          name: res[i].Username,
+          email: res[i].Email,
+          city: res[i].City,
+          state: res[i].State,
+          title: res[i].Title
+        }
+        $scope.cityofficials.push(obj);
+      }
+
+    });
+    $scope.checkedNames = {};
   }
   $scope.back = function() {
     $location.path('admin');

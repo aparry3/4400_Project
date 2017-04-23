@@ -26,6 +26,8 @@ angular.module('databaseProject').controller('NewDPCtrl', ['$scope','DataPoints'
   // });
   $scope.addDataPoint = function(dataPoint) {
     DataPoints.add(dataPoint);
+    $scope.dp = {};
+
   }
   $scope.newLocation = function() {
     $location.path('new_location');
