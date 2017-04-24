@@ -86,18 +86,18 @@ router.post('/filtered_data_points', function(req, res, next) {
     console.log(key);
     if (req.body[key] != null && req.body[key] != '') {
 
-      if (key == 'low_date') {
+      if (key == 'lowDate') {
         var where = "Date_Time " + " > '" + req.body[key]+"'";
         wheres.push(where);
 
-      } else if (key == 'high_date') {
+      } else if (key == 'highDate') {
         var where = "Date_Time " + " < '" + req.body[key]+"'";
         wheres.push(where);
-      } else if (key == 'valuelow') {
-        var where = "Value " + " < '" + req.body[key]+"'";
+      } else if (key == 'valueLow') {
+        var where = "Value" + " > " + req.body[key]+"";
         wheres.push(where);
-      }else if (key == 'valuehigh') {
-        var where = "Value " + " < '" + req.body[key]+"'";
+      }else if (key == 'valueHigh') {
+        var where = "Value " + " < " + req.body[key]+"";
         wheres.push(where);
       }  else {
         var where = key + " = '" + req.body[key]+"'";
@@ -109,7 +109,7 @@ router.post('/filtered_data_points', function(req, res, next) {
 
   var where = wheres.join(' AND ');
   console.log(where);
-  conn.query("SELECT * FROM DATAPOINT WHERE " + where +';', function (err, data) {
+  conn.query("SELECT * FROM DATAPOINT WHERE " + where +' ORDER BY DpDate;', function (err, data) {
     if (err) return res.status(400).send();
     console.log(data);
     res.send(data);
@@ -229,6 +229,13 @@ router.put('/city_officials/:username/:pending', function(req, res, next) {
     if (err) return res.status(400).send();
 
   }));
+});
+router.put('/flag_poi/:name/:date', function(req, res, next) {
+
+  conn.query('UPDATE POI SET Flagged = 1, Date_Time_Flagged = "'+req.params.date+ '" WHERE Name = "'+req.params.name+'"' , function (err, data) {
+    if (err) return res.status(400).send();
+
+  });
 });
 
 router.get('/poi_all_info', function(req, res, next) {

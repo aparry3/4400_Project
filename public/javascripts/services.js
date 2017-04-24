@@ -18,13 +18,20 @@ angular.module('databaseProject')
   }
   function addUser(user) {
     var def = $q.defer();
-    users.push(user);
-    us = {
-      'Username': user.username,
-      'Password': user.password,
-      'Email': user.email,
-      'Usertype': user.type
+    try {
+      us = {
+        'Username': user.username,
+        'Password': user.password,
+        'Email': user.email,
+        'Usertype': user.type
+      }
+    } catch (err) {
+      def.reject(err);
+      return def.promise;
     }
+    users.push(user);
+
+
     $http.post('/user',us).success(function(data) {
        user = data;
        console.log(data);
@@ -201,6 +208,11 @@ angular.module('databaseProject')
       angular.copy(data.data, locs);
     });
   }
+  function flag(name) {
+    return $http.put('/flag_poi/'+name+'/'+new Date().toISOString().slice(0, 19).replace('T', ' ')).success(function(data) {
+      angular.copy(data.data, locs);
+    });
+  }
   function filter(filters) {
     console.log(filters);
     return $http.post('/pois_filtered',filters).success(function(data) {
@@ -226,7 +238,6 @@ angular.module('databaseProject')
       l = {
         'City':loc.city,
         'State':loc.state,
-        'Date_Time_Flagged': new Date().toISOString().slice(0, 19).replace('T', ' '),
         'Flagged': 0,
         'Name':loc.name,
         'Zipcode':loc.zipcode
@@ -249,6 +260,7 @@ angular.module('databaseProject')
   return {
     add: add,
     get: get,
+    flag,flag,
     filter:filter,
     getAllInfo: getAllInfo,
     getNames: getNames

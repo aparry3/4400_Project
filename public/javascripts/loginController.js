@@ -25,7 +25,7 @@ angular.module('databaseProject').controller('LoginCtrl', ['$scope','$location',
         } else if (this.user[0].Usertype == 'City Official') {
           var co = {};
           CityOfficials.getUser(this.user[0]).success(function(data) {
-            if (data[0].Pending == 0) {
+            if (data[0].Pending != 1) {
               $scope.loginFailed = true;
             } else {
               console.log("city official");

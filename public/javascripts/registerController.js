@@ -74,7 +74,7 @@ function($scope,Users,Locations,$location,CityOfficials) {
     },function(err) {
       $scope.error = true;
     });
-    if (user.type == 'City Official') {
+    if (user != null &&user.type != null && user.type == 'City Official') {
         co = {
           'Username': user.username,
           'Title': user.title,

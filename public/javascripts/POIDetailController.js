@@ -20,6 +20,17 @@ angular.module('databaseProject').controller('POIDetailCtrl', ['$scope','$routeP
       $scope.filteredPoints = data;
     });
   }
+  $scope.reset = function() {
+    $scope.filters = {
+      POI:$routeParams.id
+    };
+    DataPoints.getPoints($scope.filters).success(function(data) {
+      $scope.filteredPoints = data;
+    });
+  }
+  $scope.flag = function() {
+    POIs.flag($scope.poi);
+  }
   $scope.back = function() {
     $location.path('poi_list');
   }
