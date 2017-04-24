@@ -38,7 +38,7 @@ function($scope,Locations,DataPoints,$location) {
         //accept WHERE .name = name
       }
       DataPoints.getPending().success(function(res) {
-        console.log(res);
+        console.log("data points" + res);
         $scope.datapoints = [];
 
         for (var i in res) {
